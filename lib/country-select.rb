@@ -16,9 +16,11 @@ module ActionView
 
         if priority_countries
           if (unlisted = priority_countries - COUNTRIES).any?
-            raise RuntimeError.new("Supplied priority countries are not in the main list: #{unlisted}")
+            #raise RuntimeError.new("Supplied priority countries are not in the main list: #{unlisted}")
+            country_options += "<option value=\"\">#{unlisted[0]}</option>\n"
+          else
+            country_options += options_for_select(priority_countries, selected)
           end
-          country_options += options_for_select(priority_countries, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
 
           # prevents selected from being included twice in the HTML which causes
